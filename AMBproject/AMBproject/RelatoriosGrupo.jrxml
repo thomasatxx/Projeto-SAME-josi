@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorios" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="640bfef7-0708-449c-acf3-c01bbfc97d7b">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\iReposrt\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT COUNT(*), U.LOGIN FROM ATENDIMENTOS A
+JOIN USUARIOS U ON (U.ID_LOGIN = A.ID_LOGIN)
+GROUP BY U.LOGIN
+ORDER BY COUNT(*) DESC]]>
+	</queryString>
+	<field name="COUNT(*)" class="java.math.BigDecimal"/>
+	<field name="LOGIN" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="4" width="132" height="67" uuid="30e21a34-a484-467d-aca8-f74f244b330e"/>
+				<imageExpression><![CDATA["c:\\AMB - System\\SCALOGO-.bmp"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="149" y="7" width="284" height="67" uuid="99448512-0420-40d4-8b93-1f6881c137b5"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[            Relatórios
+Quantidade por Usuário]]></text>
+			</staticText>
+			<image>
+				<reportElement x="442" y="4" width="107" height="71" uuid="7f5e6878-b160-4327-addd-e235d47049e1"/>
+				<imageExpression><![CDATA["c:\\AMB - System\\paramedic.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="15" backcolor="#000000" uuid="fc33a11d-826f-4b7e-ac65-8673f81c646d"/>
+			</rectangle>
+			<textField>
+				<reportElement x="504" y="17" width="40" height="17" uuid="e931c26b-6181-4275-bdcd-4c0e1343f7ed"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="436" y="17" width="73" height="16" uuid="1769990e-6c4b-4b70-8bd6-498beabd7bd1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Quantidade:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="157" y="-1" width="72" height="20" uuid="230ee31c-71b7-4f6f-bf08-e75f08f80d24"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="0" width="77" height="20" uuid="0798a911-27cc-4527-8b38-c76cd66b0c9d"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[USUÁRIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="02594b79-2cbd-4ace-8840-0ed247c30902"/>
+			</line>
+			<textField>
+				<reportElement x="330" y="2" width="77" height="20" uuid="483de0a0-d66c-4734-8f82-4f351fadcbfd"/>
+				<textFieldExpression><![CDATA[$F{LOGIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="2" width="72" height="20" uuid="0b392827-a78a-4695-8cea-fab211ef85dc"/>
+				<textFieldExpression><![CDATA[$F{COUNT(*)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="62" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="44" width="553" height="17" backcolor="#000000" uuid="842fb5d4-f1ac-4264-ab06-0c3fe6166e96"/>
+			</rectangle>
+			<textField>
+				<reportElement x="524" y="27" width="28" height="17" uuid="8ff6a274-84e5-4944-aca3-887f1ee0b6ae"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="75" y="26" width="129" height="20" uuid="9a934bc5-9867-4c34-8977-ce3659519bde"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="25" width="71" height="20" uuid="16f34987-9b48-408e-9386-34fc8bfe11df"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Emitido em:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="26" width="45" height="20" uuid="9f8a6a18-f962-4fb4-898b-e171bf69fb46"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
